@@ -1,0 +1,23 @@
+From 0ad8243c453127fcf48b2271ca64f4780f7f9f29 Mon Sep 17 00:00:00 2001
+From: Elliot Wolk <elliot.wolk@gmail.com>
+Date: Wed, 23 Sep 2015 22:09:31 -0400
+Subject: [PATCH] tpacpi-bat: dont double inhibit-charge for the special case
+ of 0xFFFF
+
+---
+ tpacpi-bat | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tpacpi-bat b/tpacpi-bat
+index 4e4d0b6..29e551d 100755
+--- a/tpacpi-bat
++++ b/tpacpi-bat
+@@ -210,7 +210,7 @@ sub setMethod($$@){
+     #they are shifting a bit somewhere; the limit should be 1440
+     #the same range in peak-shift-state is used, except shifted to the left
+     #the value returned by peak-shift-state is the REAL duration, though
+-    $info{min} *= 2 if $method eq $methodIC;
++    $info{min} *= 2 if $method eq $methodIC and $info{min} != 65535;
+     ############################################################
+ 
+     if($info{min} !~ /^\d+$/ or ($info{min} > 1440 and $info{min} != 65535)){

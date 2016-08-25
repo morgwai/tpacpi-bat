@@ -1,3 +1,0 @@
-0001-Fix-Use-of-uninitialized-value-aslBase-in-concatenat.patch
-0002-allow-the-systemd-service-to-also-be-stopped.patch
-0003-sanitize-the-path-before-calling-an-external-program.patch
